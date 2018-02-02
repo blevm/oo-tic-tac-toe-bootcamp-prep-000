@@ -39,9 +39,9 @@ class TicTacToe
     puts "Please enter 1-9:"
     input = gets.strip
     index = input_to_index(input)
-    if valid_move?(index)
-      move(index, current_player(@board))
-      display_board
+    if @board.valid_move?(index)
+      @board.move(index, current_player(@board))
+      @board.display_board
     else
       turn
     end
@@ -51,12 +51,12 @@ class TicTacToe
   def play
     turns = 0
     until over?
-      turn
+      @board.turn
       turns += 1
     end
-    if won?
+    if @board.won?
       puts "Congratulations #{winner(board)}!"
-    elsif draw?
+    elsif @board.draw?
       puts "Cat's Game!"
     end
   end
@@ -74,7 +74,7 @@ class TicTacToe
 
 
   def current_player
-    turn = turn_count(@board)
+    turn = @board.turn_count
     if turn.even?
       "X"
     else
