@@ -50,7 +50,7 @@ class TicTacToe
     end
   end
 
-  
+
 def play
   turns = 0
   until over?(@board)
