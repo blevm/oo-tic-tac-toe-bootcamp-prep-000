@@ -31,10 +31,36 @@ class TicTacToe
   end
 
   def valid_move?
-  if @index.between?(0,8)
-    if !position_taken?(@board, @index)
-      true
+    if @index.between?(0,8)
+      if !position_taken?(@board, @index)
+        true
+      end
     end
+  end
+
+  def turn
+    puts "Please enter 1-9:"
+    input = gets.strip
+    index = input_to_index(input)
+    if valid_move?(@board, index)
+      move(@board, index, current_player(@board))
+      display_board(@board)
+    else
+      turn(@board)
+    end
+  end
+
+  
+def play
+  turns = 0
+  until over?(@board)
+    turn(@board)
+    turns += 1
+  end
+  if won?(@board)
+    puts "Congratulations #{winner(board)}!"
+  elsif draw?(@board)
+    puts "Cat's Game!"
   end
 end
 
