@@ -29,7 +29,15 @@ class TicTacToe
   def position_taken?
     !(@board[@index].nil? || @board[@index] == " ")
   end
-  
+
+  def valid_move?
+  if @index.between?(0,8)
+    if !position_taken?(@board, @index)
+      true
+    end
+  end
+end
+
   WIN_COMBINATIONS = [
     [0,1,2],
     [3,4,5],
