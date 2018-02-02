@@ -64,17 +64,87 @@ def play
   end
 end
 
-  WIN_COMBINATIONS = [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [6,4,2]
-  ]
 
+def turn_count
+  turn_counter = 0
+  @board.each do |index|
+    if index == "X" || index == "O"
+    turn_counter += 1
+    end
+  end
+  turn_counter
+end
+
+
+def current_player
+  turn = turn_count(@board)
+  if turn.even?
+    "X"
+  else
+    "O"
+  end
+end
+
+# Define your WIN_COMBINATIONS constant
+WIN_COMBINATIONS = [
+  [0,1,2],
+  [3,4,5],
+  [6,7,8],
+  [0,3,6],
+  [1,4,7],
+  [2,5,8],
+  [0,4,8],
+  [6,4,2]
+]
+
+def won?
+  WIN_COMBINATIONS.any? do |win_combination|
+    win_index_1 = win_combination[0]
+    win_index_2 = win_combination[1]
+    win_index_3 = win_combination[2]
+
+    position_1 = @board[win_index_1]
+    position_2 = @board[win_index_2]
+    position_3 = @board[win_index_3]
+
+    if position_1 == "X" && position_2 == "X" && position_3 == "X" || position_1 == "O" && position_2 == "O" && position_3 == "O"
+      return win_combination
+    else
+      false
+    end
+  end
+end
+
+def full?
+  @board.all? do |index|
+    index.include?("X") || index.include?("O")
+  end
+end
+
+def draw?
+  if !won?(@board) && full?(@board)
+    return true
+  end
+end
+
+def over?
+  if won?(@board) || full?(@board) || draw?(@board)
+    return true
+  end
+end
+
+def winner
+ if won?(@board)
+   win_index_1 = won?(board)[0]
+   win_index_2 = won?(board)[1]
+   win_index_3 = won?(board)[2]
+
+   position_1 = @board[win_index_1]
+   position_2 = @board[win_index_2]
+   position_3 = @board[win_index_3]
+   return position_1
+ end
+end
 
 
 end
