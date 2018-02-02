@@ -14,6 +14,16 @@ class TicTacToe
     puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
   end
 
+  def input_to_index(x)
+    x.to_i - 1
+  end
+
+  def move(board, index, current_player)
+    @index = index
+    @current_player = current_player
+    @board[@index] = @current_player
+  end
+
   WIN_COMBINATIONS = [
     [0,1,2],
     [3,4,5],
